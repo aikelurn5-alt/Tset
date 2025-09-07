@@ -3,7 +3,7 @@ import os
 import re
 from url import check_url
 
-API_TOKEN = os.environ.get('8053442928:AAFJP6H7b85-5wdUck2O_L7hQ2DM_ewOtp4')
+API_TOKEN = os.environ.get('API_TOKEN')
 
 if not API_TOKEN:
     raise ValueError("No API_TOKEN environment variable set")
