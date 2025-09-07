@@ -3,10 +3,13 @@ import os
 import re
 from url import check_url
 
+# Environment variable ကို စစ်ဆေးပါ
 API_TOKEN = os.environ.get('API_TOKEN')
-
 if not API_TOKEN:
-    raise ValueError("No API_TOKEN environment variable set")
+    print("ERROR: No API_TOKEN environment variable found!")
+    # Fallback to hardcoded token (temporary solution)
+    API_TOKEN = '7541477009:AAEPEaYn7sT_CCQ_OB5foTOIO8fP8Si4-so'
+    print("Using fallback token (not recommended for production)")
 
 bot = telebot.TeleBot(API_TOKEN)
 
@@ -32,5 +35,10 @@ def send_url(message):
         bot.edit_message_text(f"Error: {str(e)}", chat_id=bot0.chat.id, message_id=bot0.message_id)
 
 if __name__ == "__main__":
-    print("Bot is working!")
-    bot.infinity_polling()
+    print("Bot is starting...")
+    print(f"Token: {API_TOKEN[:10]}...")  # Token ရဲ့ first 10 characters ကိုပဲ ပြမယ်
+    try:
+        bot.infinity_polling()
+        print("Bot is running!")
+    except Exception as e:
+        print(f"Bot error: {e}")
